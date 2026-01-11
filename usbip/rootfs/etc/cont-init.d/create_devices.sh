@@ -32,7 +32,6 @@ if ! bashio::fs.file_exists "${mount_script}"; then
     server_address=$(bashio::config "devices[${device}].server_address")
     bus_id=$(bashio::config "devices[${device}].bus_id")
     bashio::log.info "Adding device from server ${server_address} on bus ${bus_id}"
-    echo "/usr/sbin/usbip --debug attach -r ${server_address} -b ${bus_id}" >> "${mount_script}"
 
     echo "out=\$(/usr/sbin/usbip --debug attach -r ${server_address} -b ${bus_id} 2>&1) || rc=\$?" >> "${mount_script}"
     echo "if echo \"\$out\" | grep -q \"Device busy (exported)\"; then" >> "${mount_script}"
